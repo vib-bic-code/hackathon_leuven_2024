@@ -1,0 +1,60 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "biaflows_objseg"
+description: (WIP) wrapper for the BIAFlows object segmentation workflow
+keywords:
+  - quality control
+  - image analysis
+  - biaflows
+  - imaging
+tools:
+  - "biaflows":
+      description: "Utilities to simplify BIAFLOWS workflow creation. The complete documentation for creating a new workflow and adding it to a BIAFLOWS instance is available at: https://neubias-wg5.github.io/creating_bia_workflow_and_adding_to_biaflows_instance.html"
+      homepage: "https://github.com/Neubias-WG5/biaflows-workflow-utilities"
+      documentation: "https://github.com/Neubias-WG5/biaflows-workflow-utilities"
+      tool_dev_url: "https://github.com/Neubias-WG5/biaflows-workflow-utilities"
+      doi: ""
+      licence: 
+      identifier: biotools:biaflows
+
+input:
+  # Only when we have meta
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+  
+    - pred_image:
+        type: file
+        description: tiff file
+        pattern: "*.{tif, tiff}"
+
+    - ground_truth:
+        type: file
+        description: tiff file
+        pattern: "*.{tif, tiff}"
+
+
+output:
+  - bam:
+    - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - "*.csv":
+        type: file
+        description: QC metric csv file
+        pattern: "*.csv"
+          
+  - versions:
+    - "versions.yml":
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+
+authors:
+  - "@BioinfoTongLI"
+maintainers:
+  - "@BioinfoTongLI"

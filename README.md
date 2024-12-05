@@ -69,6 +69,24 @@ Palom is a whole-slide registration tool that registers multi-channel 2D TIFF an
 [Proposal 3](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/1257e5c1e600cdeae6ab9a8e3359af13657d19f6/modules/vib/palom/tests/nextflow.config#L13):
 - in addition to either Proposal 1 or 2 where the parameters are described, provide an example of how the arguments / parameters would be passed to the module in a clear way
 
+## Wrapping BIAFLOWS QC modules
+
+Started wrapping BIALFOWS QC steps into module:
+    
+- WIP: python level changes required (https://github.com/Neubias-WG5/biaflows-utilities/issues/2).
+- TODO: Submit datasets with ground truth to some public repo, e.g. Sanger S3(?)
+
+## Chat about out-of-memory image analysis
+
+- [x] refactor `tiled_cellpose/spotiflow`
+    - [x] https://github.com/BioinfoTongLI/modules/tree/develop/modules/sanger/bioinfotongli/generatetiles
+    - [x] https://github.com/BioinfoTongLI/modules/tree/develop/modules/sanger/bioinfotongli/cellpose
+- [ ] push to nf-core for review
+
+
+## VALIS registration module
+- [ ] Wrap VALIS image registration into module. PR to be created
+
 ## Tutorials
 
 During the hackathon we learned and tried many things, those include:
