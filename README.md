@@ -2,6 +2,12 @@
 
 ## Image analysis nf-core module incubator
 
+### InstantSeg
+
+**links**
+- [nf-core issue](https://github.com/nf-core/modules/issues/7152)
+- Assignee: @migueLib
+
 ### CAREamics modules & subworkflow plan
 
 **links**
