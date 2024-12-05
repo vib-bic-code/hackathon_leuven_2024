@@ -6,7 +6,7 @@
 
 **links**
 - [nf-core issue](https://github.com/nf-core/modules/issues/7152)
-- Assignee: @migueLib
+- Assignee: [@migueLib](https://github.com/migueLib)
 
 ### CAREamics modules & subworkflow plan
 
