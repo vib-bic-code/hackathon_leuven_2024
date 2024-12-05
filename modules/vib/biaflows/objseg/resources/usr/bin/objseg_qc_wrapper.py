@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright (c) 2024 Wellcome Sanger Institute
 from biaflows.metrics import *
 import fire
 
