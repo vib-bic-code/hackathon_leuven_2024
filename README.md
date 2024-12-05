@@ -35,10 +35,10 @@ flowchart TD
     PA[config]
     PB[train]
     PC[predict]
-    DA@{ shape: docs, label: "Image files"}
-    DB@{ shape: doc, label: "n2v config file"}
-    DC@{ shape: doc, label: "trained model"}
-    DE@{ shape: docs, label: "prediction result files"}
+    DA@{ shape: lean-r, label: "Image files"}
+    DB@{ shape: lean-r, label: "n2v config file"}
+    DC@{ shape: lean-r, label: "trained model"}
+    DE@{ shape: lean-r, label: "prediction result files"}
 
     PA --> DB
     DB --> PB
