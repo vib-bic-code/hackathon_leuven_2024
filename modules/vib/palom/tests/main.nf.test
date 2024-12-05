@@ -1,0 +1,64 @@
+nextflow_process {
+
+    name "Test Process PALOM"
+    script "../main.nf"
+    config "./nextflow.config"
+    process "PALOM"
+
+    tag "modules"
+    tag "modules_vib"
+    tag "palom"
+
+    test("palom - tiff") {
+
+        when {
+            process {
+                """           
+                input[0] = [
+                    [ id:'test' ], // meta map
+                    [
+                        file('../../../data/2channel_reference.tiff', checkIfExists: true),
+                        file('../../../data/2channel_moving.tiff', checkIfExists: true)
+                    ]
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("palom - tiff - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """           
+                input[0] = [
+                    [ id:'test' ], // meta map
+                    [
+                        file('../../../data/2channel_reference.tiff', checkIfExists: true),
+                        file('../../../data/2channel_moving.tiff', checkIfExists: true)
+                    ]
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

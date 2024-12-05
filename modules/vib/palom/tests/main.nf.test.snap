@@ -1,0 +1,68 @@
+{
+    "palom - tiff - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ome.tif:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,d157b6c8b22f7304d0a7b3a5b790c85d"
+                ],
+                "registered_image": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ome.tif:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,d157b6c8b22f7304d0a7b3a5b790c85d"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-05T14:40:05.716453983"
+    },
+    "palom - tiff": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ome.tif:md5,d44614f8a1570d44674fab0a030a6953"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,d157b6c8b22f7304d0a7b3a5b790c85d"
+                ],
+                "registered_image": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ome.tif:md5,d44614f8a1570d44674fab0a030a6953"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,d157b6c8b22f7304d0a7b3a5b790c85d"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.2"
+        },
+        "timestamp": "2024-12-05T14:44:03.613131382"
+    }
+}

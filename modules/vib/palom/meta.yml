@@ -1,0 +1,63 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "palom"
+description: Palom (Piecewise alignment for layers of mosaics) is a tool for registering whole-slide images of the same section with different stainings. This module specifically works with TIFF and OME-TIFF input data.
+keywords:
+  - image
+  - microscopy
+  - registration
+tools:
+  - "palom":
+      description: "Palom (Piecewise alignment for layers of mosaics) is a tool for registering whole-slide images of the same section with different stainings."
+      homepage: "https://github.com/labsyspharm/palom"
+      documentation: "https://github.com/labsyspharm/palom"
+      tool_dev_url: "https://github.com/labsyspharm/palom"
+      licence: ["MIT"]
+      identifier: ""
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+
+    - images:
+        type: file
+        description: List of two-dimensional multi-channel images. The first image is the reference image. Channel for alignment is by default channel 0. Required format TIFF or OME-TIFF.
+        pattern: "*.{ome.tiff,ome.tif,tiff,tif}"
+
+output:
+  - registered_image:
+    - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+    - "*.ome.tif":
+        type: file
+        description: One multi-channel pyramidal OME-TIFF containing both the reference image and all registered moving images. Example two input images (i) with three stainings (s), the output channel order will be i0_s0, i0_s1, i0_s2, i1_s0, i1_s1, i1_s2. The pixel size metadata
+        pattern: "*.{ome.tif}"
+
+  - versions:
+    - "versions.yml":
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+
+# Proposal (1) for documentation of optional parameters for modules.
+optional_parameters:
+  - - thumbnail_level:
+        type: integer
+        description: |
+          Resolution level to use for coarse alignment. By default, it is approximated based on image shape.
+        default: None
+  - - px_size:
+        type: number
+        description: |
+          Pixel size in microns. By default, it is extracted from the image metadata. If provided, the user-defined input will overwrite the detected pixel size information.
+
+authors:
+  - "@kbestak"
+maintainers:
+  - "@kbestak"
