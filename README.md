@@ -14,4 +14,4 @@ During the hackathon we learned and tried many things, those include:
 
 We also had some nice presentations.
 - [MCMICRO](./presentations/slides_MCMICRO.pdf)
-- [MOLKART](./presentations/slides_MOLKART.pdf)
+- [MOLKART](./presentations/slides_Molkart.pdf)
