@@ -1,0 +1,64 @@
+// TODO nf-core: Once you have added the required tests, please run the following command to build this file:
+// nf-core modules test biaflows/objseg
+nextflow_process {
+
+    name "Test Process BIAFLOWS_OBJSEG"
+    script "../main.nf"
+    config "./nextflow.config"
+    process "BIAFLOWS_OBJSEG"
+
+    tag "modules"
+    tag "modules_vib"
+    tag "biaflows"
+    tag "biaflows/objseg"
+
+    // TODO nf-core: Change the test name preferably indicating the test-data and file-format used
+    test("biaflows - tif") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test'],
+                    file('/lustre/scratch126/cellgen/cellgeni/tl10/containers/biaflows/0.9.3/tests/00-Pixel-classification/testA_1.tif', checkIfExists: true),
+                    file('/lustre/scratch126/cellgen/cellgeni/tl10/containers/biaflows/0.9.3/tests/00-Pixel-classification/testA_1_lbl.tif', checkIfExists: true),
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("biaflows - tif - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test'], // meta map
+                    file('/lustre/scratch126/cellgen/cellgeni/tl10/containers/biaflows/0.9.3/tests/00-Pixel-classification/testA_1.tif', checkIfExists: true),
+                    file('/lustre/scratch126/cellgen/cellgeni/tl10/containers/biaflows/0.9.3/tests/00-Pixel-classification/testA_1_lbl.tif', checkIfExists: true),
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}
