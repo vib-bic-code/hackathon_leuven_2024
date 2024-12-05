@@ -43,6 +43,26 @@ flowchart TD
     PC --> DE
 ```
 
+### nf-core module for Palom using custom CLI
+**links**
+- [nf-core issue](https://github.com/nf-core/modules/issues/7165)
+- [Tool repository](https://github.com/labsyspharm/palom)
+
+Palom is a whole-slide registration tool that registers multi-channel 2D TIFF and OME-TIFF images. Using a custom CLI wrapper provided in the module's `resources/usr/bin` subdirectory, Palom can be applied on an image list and produces a multi-channel pyramidal OME-TIFF containing both the reference image and all registered moving images.
+
+#### Optional parameter documentation improvement ideas
+
+[Proposal 1](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/1257e5c1e600cdeae6ab9a8e3359af13657d19f6/modules/vib/palom/meta.yml#L48):
+- add an additional section in meta.yml with optional parameters, describing the most important ones in detail, including data type.
+- this approach would have to be discussed in nf-core whether it would be acceptable
+- in general, having a way to define parameters on a module level, that would be expanded to the pipeline level, would be important
+
+[Proposal 2](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/1257e5c1e600cdeae6ab9a8e3359af13657d19f6/modules/vib/palom/tests/nextflow.config#L3):
+- describe the parameters in detail in a comment block in the nextflow.config of the test for the module where some parameters might anyway be written.
+
+[Proposal 3](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/1257e5c1e600cdeae6ab9a8e3359af13657d19f6/modules/vib/palom/tests/nextflow.config#L13):
+- in addition to either Proposal 1 or 2 where the parameters are described, provide an example of how the arguments / parameters would be passed to the module in a clear way
+
 ## Tutorials
 
 During the hackathon we learned and tried many things, those include:

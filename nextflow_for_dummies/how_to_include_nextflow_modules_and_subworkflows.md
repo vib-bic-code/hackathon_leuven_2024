@@ -37,7 +37,6 @@ Please note that this document is hacked and does not attempt to be a proper doc
 ## Issues
 
 - https://github.com/nf-core/modules/issues/7159
-- https://github.com/nf-core/modules/issues/7165
 
 ## Finding nf-core image analysis modules:
 
