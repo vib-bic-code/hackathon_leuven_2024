@@ -101,7 +101,7 @@ flowchart TD
 
 Palom is a whole-slide registration tool that registers multi-channel 2D TIFF and OME-TIFF images. Using a custom CLI wrapper provided in the module's `resources/usr/bin` subdirectory, Palom can be applied on an image list and produces a multi-channel pyramidal OME-TIFF containing both the reference image and all registered moving images.
 
-#### Optional parameter documentation improvement ideas
+**Optional parameter documentation improvement ideas**
 
 [Proposal 1](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/1257e5c1e600cdeae6ab9a8e3359af13657d19f6/modules/vib/palom/meta.yml#L48):
 - add an additional section in meta.yml with optional parameters, describing the most important ones in detail, including data type.
