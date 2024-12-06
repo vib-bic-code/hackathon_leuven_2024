@@ -28,7 +28,7 @@ Input image shape metadata => List of tiles (bounding box (BB) text files)
 for each BB: // parallel processing, e.g. on a HPC
     PROCESS(Image, BB) => Analysis Results (AR) for this BB (AR_BB)
 Merge all AR_BB into one output for the whole input image
-``
+```
 
 For this to work efficiently the PROCESS function must be able to lazy load and process only the part of the image that is within the BB. And, critically, the output of PROCESS must be in the global coordinates of the whole image (and not in the local coordinates of the tile). Specifically, if the output of PROCESS is an image it must be able to contain the global tile offset information (this is something we need to look into for how to achieve this for an OME-TIFF).
 
