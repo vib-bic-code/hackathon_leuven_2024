@@ -54,6 +54,7 @@ During the hackathon we started to implement several new nf-core image processin
 **links**
 - [nf-core issue](https://github.com/nf-core/modules/issues/7157)
 - [forked nf-core/modules repo for developing CAREamics modules and subworkflows](https://github.com/CAREamics/nf-core-modules)
+- Assignees: [@diyasrivas](https://github.com/diyasrivas) [@melisande-c](https://github.com/melisande-c)
 
 
 We will create three CAREamics modules, that can be composed into CAREamics subworkflows for each of the algorithms implemented in CAREamics (Noise2Void, Noise2Noise and CARE). 
