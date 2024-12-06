@@ -116,9 +116,14 @@ Palom is a whole-slide registration tool that registers multi-channel 2D TIFF an
 
 #### Using a custom script in a module
 
-In the module's directory, create `resources/usr/bin` and place your script with a CLI. When this module is used, `nextflow.enable.moduleBinaries = true` needs to be added to the config file.
+In the module's directory, create `resources/usr/bin` and place your script with a CLI. Make sure your script has a shebang line and is called as a command in the process script block. When this module is used, `nextflow.enable.moduleBinaries = true` needs to be added to the config file. See [nextflow documentation](https://www.nextflow.io/docs/latest/module.html#module-binaries) for more info. 
 
-To add tests to such modules, in the `main.nf.test`, a config file containing the above specification needs to be pointed to with [`config ./nextflow.config`](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/c9b4db87b4d37c3bf986cb584cdfe8a73ffcf8b5/modules/vib/palom/tests/main.nf.test#L5),
+Note that this feature requires the use of a local or shared file system for the pipeline work directory. This means that the feature isn't compatible with executing your pipeline in the cloud by default, unless you're using wave containers when using cloud-based executors.  
+
+
+To add tests to such modules, in the `main.nf.test`, a config file containing the above specification needs to be pointed to with [`config ./nextflow.config`](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/c9b4db87b4d37c3bf986cb584cdfe8a73ffcf8b5/modules/vib/palom/tests/main.nf.test#L5)
+
+An example implementation of this feature was worked out for the [palom](modules/vib/palom/) module.
 
 ### Wrapping BIAFLOWS QC modules
 
