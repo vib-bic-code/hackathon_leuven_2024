@@ -118,6 +118,9 @@ Started wrapping BIALFOWS QC steps into module:
 - WIP: python level changes required (https://github.com/Neubias-WG5/biaflows-utilities/issues/2).
 - TODO: Submit datasets with ground truth to some public repo, e.g. Sanger S3(?)
 
+### VALIS registration module
+- [ ] Wrap VALIS image registration into module. PR to be created
+
 ### Wrapping image data conversion tools as nf-core modules
 
 **Link to the repository:**
@@ -138,10 +141,3 @@ Started wrapping BIALFOWS QC steps into module:
 * Wrap an aggregative conversion module (concatenates images along specified dimensions)
 * Push the modules to nf-core
 
-
-
-
-
-
-### VALIS registration module
-- [ ] Wrap VALIS image registration into module. PR to be created
