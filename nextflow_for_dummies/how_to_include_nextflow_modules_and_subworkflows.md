@@ -233,6 +233,7 @@ ls -la output
 
 ## Additional notes
 
+
 ### Singularity
 
 If you run the modules using Apptainer/Singularity please consider the following commands
@@ -242,8 +243,31 @@ export SINGULARITY_CACHEDIR=/g/cba/cache/singularity
 export NXF_SINGULARITY_CACHEDIR=/g/cba/cache/singularity
 ```
 
+# Including modules in pre-existing pipelines
+In the tutorial above, we started from a bare repository. We subsequently also tested and succeeded in including a nextflow module in a pre-existing nextflow pipeline.
 
+You can use the steps described above if you make sure to correctly setup the following 2 things:
+1. Module folder structure
+2. manifest scope in `nextflow.config`
 
+## Module folder structure
+All modules used in your pipeline that are not installed through nf-core tooling should be located inside a `modules/local/` folder.
+
+This is because all folders in the `modules` folder are expected to be related to a module repository (defined in the `modules.json file`). Only the `local` folder (and it's content) is not expected to be such a remote repository.
+
+##  Manifest section in `nextflow.config`
+
+Your `nextflow.config` file needs to contain a `manifest` scope
+
+example:
+```groovy
+manifest{
+    name = "Kobe"
+    description = "description"
+    author = "Kobe"
+    version = "v1"
+}
+```
 
 
 
