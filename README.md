@@ -5,8 +5,11 @@
 During the hackathon we learned and tried many things, those include:
 
 - [How to use existing Nextflow image analysis modules and subworkflows](nextflow_for_dummies/how_to_include_nextflow_modules_and_subworkflows.md)
-- [How to create a nf-core pipeline with an existing nf-core module step-by-step](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/main/nextflow_for_dummies/create_new_nf-core_pipeline.md)
+- [How to create an nf-core pipeline with an existing nf-core module step-by-step](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/main/nextflow_for_dummies/create_new_nf-core_pipeline.md)
 - [How to create an nf-core module](https://shy-cold-a09.notion.site/Make-an-NF-Core-module-da38fe5fdc534f1d8432f63b3832f10c?pvs=74)
+
+In the above list, please note that there is a difference between nf-core and Nextflow, where nf-core implies to use the Nextflow infrastructure in a very specific way, which initially is more complex, but, if you have large projects is probably a good idea!
+
 
 ## Slides
 
