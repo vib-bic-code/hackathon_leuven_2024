@@ -1,0 +1,21 @@
+Bootstrap: docker
+From: continuumio/miniconda3
+
+%files
+
+%runscript
+. /opt/conda/etc/profile.d/conda.sh
+conda activate /opt/conda/envs/careamics_gpu
+exec "$@"
+
+%environment
+CONDA_BIN_PATH="/opt/conda/bin"    
+export PATH="$CONDA_BIN_PATH:$PATH"
+
+%post   
+apt-get update -y   
+apt install -y build-essential
+export PATH="/opt/conda/bin:$PATH"      
+conda create --name careamics_gpu python==3.10 pytorch torchvision pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install --upgrade pip
+/opt/conda/envs/careamics_gpu/bin/pip install careamics

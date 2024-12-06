@@ -54,7 +54,11 @@ During the hackathon we started to implement several new nf-core image processin
 **links**
 - [nf-core issue](https://github.com/nf-core/modules/issues/7157)
 - [forked nf-core/modules repo for developing CAREamics modules and subworkflows](https://github.com/CAREamics/nf-core-modules)
+- Assignees: [@diyasrivas](https://github.com/diyasrivas) [@melisande-c](https://github.com/melisande-c)
 
+**Container**
+- Thank you to [@tatianawoller](https://github.com/tatianawoller) for making a container for the CAREamics module! 
+- Apptainer definition file [here](careamics.def).
 
 We will create three CAREamics modules, that can be composed into CAREamics subworkflows for each of the algorithms implemented in CAREamics (Noise2Void, Noise2Noise and CARE). 
 
@@ -97,7 +101,7 @@ flowchart TD
 
 Palom is a whole-slide registration tool that registers multi-channel 2D TIFF and OME-TIFF images. Using a custom CLI wrapper provided in the module's `resources/usr/bin` subdirectory, Palom can be applied on an image list and produces a multi-channel pyramidal OME-TIFF containing both the reference image and all registered moving images.
 
-#### Optional parameter documentation improvement ideas
+**Optional parameter documentation improvement ideas**
 
 [Proposal 1](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/1257e5c1e600cdeae6ab9a8e3359af13657d19f6/modules/vib/palom/meta.yml#L48):
 - add an additional section in meta.yml with optional parameters, describing the most important ones in detail, including data type.
