@@ -110,6 +110,12 @@ Palom is a whole-slide registration tool that registers multi-channel 2D TIFF an
 [Proposal 3](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/1257e5c1e600cdeae6ab9a8e3359af13657d19f6/modules/vib/palom/tests/nextflow.config#L13):
 - in addition to either Proposal 1 or 2 where the parameters are described, provide an example of how the arguments / parameters would be passed to the module in a clear way
 
+#### Using a custom script in a module
+
+In the module's directory, create `resources/usr/bin` and place your script with a CLI. When this module is used, `nextflow.enable.moduleBinaries = true` needs to be added to the config file.
+
+To add tests to such modules, in the `main.nf.test`, a config file containing the above specification needs to be pointed to with [`config ./nextflow.config`](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/c9b4db87b4d37c3bf986cb584cdfe8a73ffcf8b5/modules/vib/palom/tests/main.nf.test#L5),
+
 ### Wrapping BIAFLOWS QC modules
 
 Started wrapping BIALFOWS QC steps into module:
