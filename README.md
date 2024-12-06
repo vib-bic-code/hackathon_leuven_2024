@@ -1,6 +1,44 @@
 # hackathon_leuven_2024
 
+## Tutorials
+
+During the hackathon we learned and tried many things, those include:
+
+- [How to use existing Nextflow image analysis modules and subworkflows](nextflow_for_dummies/how_to_include_nextflow_modules_and_subworkflows.md)
+- [How to create a nf-core pipeline with an existing nf-core module step-by-step](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/main/nextflow_for_dummies/create_new_nf-core_pipeline.md)
+- [How to create an nf-core module](https://shy-cold-a09.notion.site/Make-an-NF-Core-module-da38fe5fdc534f1d8432f63b3832f10c?pvs=74)
+
+## Slides
+
+We also had some nice presentations.
+- [MCMICRO](./presentations/slides_MCMICRO.pdf)
+- [MOLKART](./presentations/slides_Molkart.pdf)
+
+## Larger-than-memory image analysis in Nextflow discussion
+
+Tong Li presented a generic solution for how to process larger-than-memory images in Nextflow.
+
+The general idea is:
+
+```
+Input image shape metadata => List of tiles (bounding box (BB) text files)
+for each BB: // parallel processing, e.g. on a HPC
+    PROCESS(Image, BB) => Analysis Results (AR) for this BB (AR_BB)
+Merge all AR_BB into one output for the whole input image
+``
+
+For this to work efficiently the PROCESS function must be able to lazy load and process only the part of the image that is within the BB.
+
+Below are some links to the implementation.
+
+- [x] refactor `tiled_cellpose/spotiflow`
+    - [x] https://github.com/BioinfoTongLI/modules/tree/develop/modules/sanger/bioinfotongli/generatetiles
+    - [x] https://github.com/BioinfoTongLI/modules/tree/develop/modules/sanger/bioinfotongli/cellpose
+- [ ] push to nf-core for review
+
 ## Image analysis nf-core module incubator
+
+During the hackathon we started to implement several new nf-core image processing modules. 
 
 ### InstantSeg
 
@@ -69,34 +107,12 @@ Palom is a whole-slide registration tool that registers multi-channel 2D TIFF an
 [Proposal 3](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/1257e5c1e600cdeae6ab9a8e3359af13657d19f6/modules/vib/palom/tests/nextflow.config#L13):
 - in addition to either Proposal 1 or 2 where the parameters are described, provide an example of how the arguments / parameters would be passed to the module in a clear way
 
-## Wrapping BIAFLOWS QC modules
+### Wrapping BIAFLOWS QC modules
 
 Started wrapping BIALFOWS QC steps into module:
     
 - WIP: python level changes required (https://github.com/Neubias-WG5/biaflows-utilities/issues/2).
 - TODO: Submit datasets with ground truth to some public repo, e.g. Sanger S3(?)
 
-## Chat about out-of-memory image analysis
-
-- [x] refactor `tiled_cellpose/spotiflow`
-    - [x] https://github.com/BioinfoTongLI/modules/tree/develop/modules/sanger/bioinfotongli/generatetiles
-    - [x] https://github.com/BioinfoTongLI/modules/tree/develop/modules/sanger/bioinfotongli/cellpose
-- [ ] push to nf-core for review
-
-
-## VALIS registration module
+### VALIS registration module
 - [ ] Wrap VALIS image registration into module. PR to be created
-
-## Tutorials
-
-During the hackathon we learned and tried many things, those include:
-
-- [How to use existing Nextflow image analysis modules and subworkflows](nextflow_for_dummies/how_to_include_nextflow_modules_and_subworkflows.md)
-- [How to create a nf-core pipeline with an existing nf-core module step-by-step](https://github.com/vib-bic-code/hackathon_leuven_2024/blob/main/nextflow_for_dummies/create_new_nf-core_pipeline.md)
-- [How to create an nf-core module](https://shy-cold-a09.notion.site/Make-an-NF-Core-module-da38fe5fdc534f1d8432f63b3832f10c?pvs=74)
-
-## Slides
-
-We also had some nice presentations.
-- [MCMICRO](./presentations/slides_MCMICRO.pdf)
-- [MOLKART](./presentations/slides_Molkart.pdf)
