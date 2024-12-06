@@ -118,5 +118,30 @@ Started wrapping BIALFOWS QC steps into module:
 - WIP: python level changes required (https://github.com/Neubias-WG5/biaflows-utilities/issues/2).
 - TODO: Submit datasets with ground truth to some public repo, e.g. Sanger S3(?)
 
+### Wrapping image data conversion tools as nf-core modules
+
+**Link to the repository:**
+- https://github.com/Euro-BioImaging/bfflow
+- Assignees: [@bugraoezdemir](https://github.com/bugraoezdemir), [@tatianawoller](https://github.com/tatianawoller)
+
+**Status by the end of the hackathon:**
+
+[bfconvert](https://bio-formats.readthedocs.io/en/stable/users/comlinetools/conversion.html), the command line tool to convert images from proprietary formats to OME-TIFF, has been wrapped as an nf-core module. Following tests have been performed and passed:
+* Execution on the single machine
+* Execution on the cluster using Slurm
+* Saving the output to a private s3 bucket
+
+[bioformats2raw](https://github.com/glencoesoftware/bioformats2raw), the command line tool to convert images from proprietary formats to OME-Zarr, is in the process of being wrapped as an nf-core module. 
+
+**TODO**
+* Finish wrapping bioformats2raw
+* Wrap an aggregative conversion module (concatenates images along specified dimensions)
+* Push the modules to nf-core
+
+
+
+
+
+
 ### VALIS registration module
 - [ ] Wrap VALIS image registration into module. PR to be created
