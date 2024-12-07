@@ -167,18 +167,19 @@ Considerations:
 FFmpeg has lots of parameters and combination/order isn't fixed which can be an issue for constructing the command line in the module. For now, we will work with a narrow use case.
 We also need a source of OME metadata. This will most likely take the form of a companion metadata file.
 
-	* Input:
-		- limit input to "standard" AVI files with YUV pixel format as produced by the lab cameras we've been dealing with.
-		- Parameter to downsample frame rate.
-		- As placeholder for OME metadata,For now, use a parameter to require pixel size information in micrometer (otherwise need to also specify unit).
+* Input:
+  - limit input to "standard" AVI files with YUV pixel format as produced by the lab cameras we've been dealing with.
+  - Parameter to downsample frame rate.
+  - As placeholder for OME metadata,For now, use a parameter to require pixel size information in micrometer (otherwise need to also specify unit).
 
-	* Output:
-		- lzw-compressed grayscale multipage OME-TIFF file
+* Output:
+  - lzw-compressed grayscale multipage OME-TIFF file
 
 **Status by the end of the hackathon:**
 
 A module wrapping ffmpeg but not fully nf-core compliant.
 
-**TODO*
-	- Make nf-core compliant
-	- Look into using bfflow
+**TODO**
+
+- Make nf-core compliant
+- Look into using bfflow
