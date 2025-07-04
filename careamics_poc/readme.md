@@ -3,7 +3,7 @@
 ## usage
 
 - starts from a csv
-- can be run on HPC slurm/locally
+- can be run on HPC slurm (if needed I will add the nextflow.config on the cluster)/locally
 - using docker or apptainer
 - predict.nf can be used independently from train.nf
 
