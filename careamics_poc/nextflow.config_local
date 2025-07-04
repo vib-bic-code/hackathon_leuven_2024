@@ -1,0 +1,45 @@
+apptainer{
+       enabled= true
+       autoMounts= true
+       cacheDir = '/scratch/leuven/348/vsc34840/.apptainer/cache'
+       tmpDir = '/scratch/leuven/348/vsc34840/.apptainer/tmp'
+}
+params {
+    test_path = "/scratch/leuven/348/vsc34840/test_careamics/test_dataset_em/"
+    file_extension = "tif"
+    train_path = "/scratch/leuven/348/vsc34840/test_careamics/train_dataset_em"
+    val_path = "/scratch/leuven/348/vsc34840/test_careamics/val_dataset_em"
+    output_path = "/scratch/leuven/348/vsc34840/test_careamics/results"
+    model = "n2v2"
+    axis_train = "SYX"
+    batch_size = "64"
+    patch_size = [64, 64]
+    num_epochs = "10"
+    data_type="tiff"
+    exp_name = "n2v2_em"
+    tile_size =[256,256]
+    tile_overlap = [48,48]
+}
+
+
+process {    
+    withLabel: 'config' {
+      clusterOptions = '--account=lp_hack_bio_im  --cluster=genius --partition=gpu_p100 --gpus-per-node=1 --nodes=1 --ntasks-per-node=4'
+      container = '/scratch/leuven/348/vsc34840/nextflow_careamics/careamics_nextflow.sif'
+      containerOptions = '--containall --cleanenv --nv -B /user/leuven/348/vsc34840'
+      memory = '8 GB'
+      cpus   = 4
+   }
+    withLabel: 'train' {
+        clusterOptions = '--account=lp_hack_bio_im  --cluster=genius --partition=gpu_p100 --gpus-per-node=1 --nodes=1 --ntasks-per-node=4'
+        container = '/scratch/leuven/348/vsc34840/nextflow_careamics/careamics_nextflow.sif'
+        containerOptions = '--containall --cleanenv --nv -B /user/leuven/348/vsc34840'
+        memory = '8 GB'
+   }
+    withLabel: 'predict'{
+        clusterOptions = '--account=lp_hack_bio_im  --cluster=genius --partition=gpu_p100 --gpus-per-node=1 --nodes=1 --ntasks-per-node=16'
+        container = '/scratch/leuven/348/vsc34840/nextflow_careamics/careamics_nextflow.sif'
+        containerOptions = '--containall --cleanenv --nv -B /user/leuven/348/vsc34840'
+        memory = '8 GB'
+       }
+}
