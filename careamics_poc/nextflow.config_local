@@ -5,20 +5,25 @@ apptainer{
        tmpDir = '/scratch/leuven/348/vsc34840/.apptainer/tmp'
 }
 params {
+    //mandatory params for config
+    model = "n2v"
+    axes = "SYX"
+    batch_size = "64"
+    patch_size = "64 64 -1"
+    num_epochs = "100"
+    exp_name = "n2v2_em"
+    //mandatory params for train
+    train_path = "/scratch/leuven/348/vsc34840/test_careamics/train_dataset_em"
+    // mandatory params for test
+    
     test_path = "/scratch/leuven/348/vsc34840/test_careamics/test_dataset_em/"
     file_extension = "tif"
-    train_path = "/scratch/leuven/348/vsc34840/test_careamics/train_dataset_em"
     val_path = "/scratch/leuven/348/vsc34840/test_careamics/val_dataset_em"
     output_path = "/scratch/leuven/348/vsc34840/test_careamics/results"
-    model = "n2v2"
-    axis_train = "SYX"
-    batch_size = "64"
-    patch_size = [64, 64]
-    num_epochs = "10"
     data_type="tiff"
     exp_name = "n2v2_em"
-    tile_size =[256,256]
-    tile_overlap = [48,48]
+    tile_size = "256 256 -1"
+    tile_overlap = "48 48 -1"
 }
 
 
@@ -43,3 +48,4 @@ process {
         memory = '8 GB'
        }
 }
+
