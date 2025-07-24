@@ -1,0 +1,62 @@
+params {
+   custom_config_version      = 'master'
+   custom_config_base         = "https://raw.githubusercontent.com/nf-core/configs/${params.custom_config_version}"
+    //mandatory params for config
+   axes = "YX"
+   batch_size = "32"
+   patch_size = "128 128 -1"
+   num_epochs = "10"
+   data_type = "tiff"
+   file_extension = "tif"
+   logger ="None"
+   exp_name ="care_em"
+    
+   // params for the care and n2n algorithm
+   //nchannelsin="None"
+  // nchannelsout="None"
+   loss="mae"
+
+   // params for the n2v algorithm
+   nchannels="None"
+   roisize="11"
+   maskedpixelpercentage="0.2"
+   structn2vaxis="none"
+   structn2vspan="5"
+
+    //mandatory params for train
+    input_csv="/scratch/leuven/348/vsc34840/test_careamics/input_care.csv"
+    train_path = "/scratch/leuven/348/vsc34840/test_careamics/train_care"
+    val_path = "/scratch/leuven/348/vsc34840/test_careamics/val_dataset"
+    train_target= "/scratch/leuven/348/vsc34840/test_careamics/train_care_target"
+    val_target= "kk"
+    valpercentage = "0.01"
+    valminsplit="5"
+    output_path = "/scratch/leuven/348/vsc34840/test_careamics/results"
+
+    // mandatory params for test
+    test_path = "/scratch/leuven/348/vsc34840/test_careamics/test_care/"
+    tile_size = "128 128 -1"
+    tile_overlap = "48 48 -1"
+    write_type = "tiff"
+    test_axis="YX"
+}
+
+//includeConfig 'conf/base.config'
+includeConfig 'conf/modules.config'
+includeConfig !System.getenv('NXF_OFFLINE') && params.custom_config_base ? "${params.custom_config_base}/nfcore_custom.config" : "/dev/null"
+
+profiles {
+    tier2kul_custom {
+        process {
+            executor = 'slurm'
+            memory = '8 GB'
+            cpus = 4
+        }
+        singularity {
+            enabled = true
+            autoMounts = true
+            cacheDir = '/scratch/leuven/348/vsc34840/.apptainer/cache'
+            tmpDir = '/scratch/leuven/348/vsc34840/.apptainer/tmp'
+        }
+    }
+}

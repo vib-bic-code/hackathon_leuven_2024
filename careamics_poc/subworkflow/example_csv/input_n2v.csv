@@ -1,0 +1,2 @@
+sample,image,image_val
+0,/lustre1/scratch/348/vsc34840/test_careamics/train_dataset/DCNN400_train_gaussian25.tiff,/lustre1/scratch/348/vsc34840/test_careamics/val_dataset/DCNN400_validation_gaussian25.tiff
