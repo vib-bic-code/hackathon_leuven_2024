@@ -13,6 +13,7 @@ workflow DENOISING {
     patch_size
     num_epochs
     axes
+    file_extension
 
     main: 
     if (params.model == "n2v") {
@@ -31,7 +32,7 @@ workflow DENOISING {
             TRAIN_N2V(ch_images.combine(CONFIG_N2V.out.config))
             model_trained=TRAIN_N2V.out.model
             PREDICT_N2V(test_data.combine(TRAIN_N2V.out.model)
-                                 .map{ test,model -> tuple( test,model)})
+                                 .map{ test,model -> tuple( test,model,file_extension)})
             prediction=PREDICT_N2V.out.predictions
     }
     else if (params.model == "care"){
@@ -49,10 +50,8 @@ workflow DENOISING {
             config=CONFIG_CARE.out.config
             TRAIN_CARE(ch_images.combine(CONFIG_CARE.out.config))
             model_trained=TRAIN_CARE.out.model
-            input_pred=test_data.combine(TRAIN_CARE.out.model)
-                                 .map{ test,model -> tuple(test,model)}
-            input_pred.view()
-            PREDICT_CARE(input_pred)
+            PREDICT_CARE(test_data.combine(TRAIN_CARE.out.model)
+                                 .map{ test,model -> tuple(test,model,file_extension)})
             prediction=PREDICT_CARE.out.predictions
     }
     else if (params.model == "n2n"){
@@ -71,7 +70,7 @@ workflow DENOISING {
             TRAIN_N2N(ch_images.combine(CONFIG_N2N.out.config))
             model_trained=TRAIN_N2N.out.model
             PREDICT_N2N(test_data.combine(TRAIN_N2N.out.model)
-                                 .map{test,model -> tuple( test,model)})
+                                 .map{test,model -> tuple( test,model,file_extension)})
             prediction=PREDICT_N2N.out.predictions
     }
     else {
