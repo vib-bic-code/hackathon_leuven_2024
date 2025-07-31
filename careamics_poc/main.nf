@@ -14,5 +14,6 @@ workflow {
                params.batch_size,
                params.patch_size,
                params.num_epochs,
-               params.axes) 
+               params.axes,
+               params.file_extension) 
 }
