@@ -52,9 +52,25 @@ profiles {
             memory = '8 GB'
             cpus = 4
         }
+       singularity {
+            enabled = true
+            autoMounts = true
+            containerOptions = '--nv'
+            cacheDir = '/scratch/leuven/348/vsc34840/.apptainer/cache'
+            tmpDir = '/scratch/leuven/348/vsc34840/.apptainer/tmp'
+        }
+     }
+    docker {
+      docker {
+         enabled = true
+         containerOptions = '--gpus all -u $(id -u):$(id -g)'
+      } 
+        }
+   singularity{
         singularity {
             enabled = true
             autoMounts = true
+            containerOptions = '--nv'
             cacheDir = '/scratch/leuven/348/vsc34840/.apptainer/cache'
             tmpDir = '/scratch/leuven/348/vsc34840/.apptainer/tmp'
         }
