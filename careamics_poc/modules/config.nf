@@ -1,5 +1,7 @@
 process configuration {
     label 'config'
+    //container "community.wave.seqera.io/library/careamics:0.0.15--f3dd84103b1e9da6" //docker
+    container 'oras://community.wave.seqera.io/library/careamics:0.0.15--79edde96e3aa7bcb' //apptainer
     input:
     tuple val(model), val(expname), val(batch_size), val(patch_size), val(num_epochs), val(axes)
 
