@@ -1,78 +1,136 @@
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    CAREamics Nextflow config file for CARE AND N2N
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Default config options for all compute environments
+----------------------------------------------------------------------------------------
+*/
+
+// Global default params, used in configs
+
 params {
-   custom_config_version      = 'master'
-   custom_config_base         = "https://raw.githubusercontent.com/nf-core/configs/${params.custom_config_version}"
-    //mandatory params for config
-   axes = "YX"
-   batch_size = "32"
-   patch_size = "128 128 -1"
-   num_epochs = "10"
-   data_type = "tiff"
-   file_extension = "tif"
-   logger ="None"
-   exp_name ="care_em"
+
+  // Base paths
+    input_csv       = "${params.basepath}/test_careamics/input_care_wsl.csv"
+    //train_path    = "${params.basepath}/test_careamics/train_dataset"
+    //val_path      = "${params.basepath}/test_careamics/val_dataset"
+    output_path     = "${params.basepath}/results_careamics"
+    test_path       = "${params.basepath}/test_careamics/U2OS/test/low"
+    outdir          = "${params.output_path}"  // Added for timeline/report/trace/dag
+
+    // nf-core/configs integration
+    custom_config_version = 'master'
+    custom_config_base    = "https://raw.githubusercontent.com/nf-core/configs/${params.custom_config_version}"
+    trace_report_suffix   = new java.util.Date().format('yyyy-MM-dd_HH-mm-ss')
+
+    // Mandatory params for config
+    axes            = "YX"
+    batch_size      = 32
+    patch_size      = "128 128 -1"
+    num_epochs      = 30
+    data_type       = "tiff"
+    file_extension  = "{tif,tiff}"
+    logger          = "None"
+    exp_name        = "care_em"
     
-   // params for the care and n2n algorithm
-   //nchannelsin="None"
-  // nchannelsout="None"
-   loss="mae"
+    // Params for the care and n2n algorithm
+    //nchannelsin   = "None"
+    //nchannelsout  = "None"
+    loss            = "mae"
+    roisize=11
+    maskedpixelpercentage="0.2"
+    structn2vaxis="none"
+    structn2vspan="5"
 
-   // params for the n2v algorithm
-   nchannels="None"
-   roisize="11"
-   maskedpixelpercentage="0.2"
-   structn2vaxis="none"
-   structn2vspan="5"
+    // Mandatory params for train
+    //val_target    = "kk"
+    valpercentage   = 0.01
+    valminsplit     = 20
 
-    //mandatory params for train
-    input_csv="/scratch/leuven/348/vsc34840/test_careamics/input_care.csv"
-    train_path = "/scratch/leuven/348/vsc34840/test_careamics/train_care"
-    val_path = "/scratch/leuven/348/vsc34840/test_careamics/val_dataset"
-    train_target= "/scratch/leuven/348/vsc34840/test_careamics/train_care_target"
-    val_target= "kk"
-    valpercentage = "0.01"
-    valminsplit="5"
-    output_path = "/scratch/leuven/348/vsc34840/test_careamics/results"
-
-    // mandatory params for test
-    test_path = "/scratch/leuven/348/vsc34840/test_careamics/test_care/"
-    tile_size = "128 128 -1"
-    tile_overlap = "48 48 -1"
-    write_type = "tiff"
-    test_axis="YX"
+    // Mandatory params for test
+    tile_size       = "128 128 -1"
+    tile_overlap    = "48 48 -1"
+    write_type      = "tiff"
+    test_axis       = "YX"
 }
 
-//includeConfig 'conf/base.config'
+// Load base.config by default for all pipelines
+includeConfig 'conf/base.config'
 includeConfig 'conf/modules.config'
-includeConfig !System.getenv('NXF_OFFLINE') && params.custom_config_base ? "${params.custom_config_base}/nfcore_custom.config" : "/dev/null"
 
-profiles {
-    tier2kul_custom {
-        process {
-            executor = 'slurm'
-            memory = '8 GB'
-            cpus = 4
-        }
-       singularity {
-            enabled = true
-            autoMounts = true
-            containerOptions = '--nv'
-            cacheDir = '/scratch/leuven/348/vsc34840/.apptainer/cache'
-            tmpDir = '/scratch/leuven/348/vsc34840/.apptainer/tmp'
-        }
-     }
-    docker {
-      docker {
-         enabled = true
-         containerOptions = '--gpus all -u $(id -u):$(id -g)'
-      } 
-        }
-   singularity{
-        singularity {
-            enabled = true
-            autoMounts = true
-            containerOptions = '--nv'
-            cacheDir = '/scratch/leuven/348/vsc34840/.apptainer/cache'
-            tmpDir = '/scratch/leuven/348/vsc34840/.apptainer/tmp'
-        }
+// Load nf-core institutional configs (uses params.custom_config_base)
+includeConfig !System.getenv('NXF_OFFLINE') && params.custom_config_base ? 
+    "${params.custom_config_base}/nfcore_custom.config" : "/dev/null"
+
+// Set working directory
+workDir = "${params.basepath}/work_nextflow"
+
+profiles{
+    conda_tier2{ 
+      conda.enabled=true
+      process.conda="${params.envpath_hpc}/careamics"
+      process.clusterOptions =' --clusters=genius --account=lp_hack_bio_im'
+      }
+    conda_tier1{ 
+      conda.enabled=true
+      process.conda="${params.envpath_hpc}/careamics"
+      }
+    singularity_tier2{
+        singularity.enabled= true
+        singularity.autoMounts=true
+        singularity.cacheDir= "${params.basepath}/.apptainer/cache"
+        singularity.tmpDir = "${params.basepath}/.apptainer/tmp"
+        process.clusterOptions =' --clusters=genius --account=lp_hack_bio_im'
+        process.container='community.wave.seqera.io/library/careamics:0.0.16--973e324f2f759ff5'
+        runOptions = '''
+        --containall --cleanenv --nv
+    '''
     }
+    singularity_tier1{
+        singularity.enabled= true
+        singularity.autoMounts=true
+        singularity.cacheDir= "${params.basepath}/.apptainer/cache"
+        singularity.tmpDir = "${params.basepath}/.apptainer/tmp"
+        process.container='community.wave.seqera.io/library/careamics:0.0.16--973e324f2f759ff5'
+        runOptions = '''
+        --containall --cleanenv --nv
+    '''
+    }
+    conda_wsl { 
+      conda.enabled=true
+      process.conda="${params.basepath}/miniconda3/envs/careamics"
+      }
+    apptainer_wsl{
+        apptainer.enabled= true
+        apptainer.autoMounts= true
+        apptainer.cacheDir= '${params.basepath}/.apptainer/cache'
+        apptainer.tmpDir = '${params.basepath}/.apptainer/tmp'
+        process.container='community.wave.seqera.io/library/careamics:0.0.16--973e324f2f759ff5'
+        containerOptions = '--nv'
+    }
+    docker_wsl{
+        docker.enabled=true
+        containerOptions = '--gpus all -u $(id -u):$(id -g)'
+        process.container='community.wave.seqera.io/library/careamics:0.0.16--973e324f2f759ff5'
+    }
+}
+
+timeline {
+    enabled = true
+    file    = "${params.outdir}/pipeline_info/execution_timeline_${params.trace_report_suffix}.html"
+}
+
+report {
+    enabled = true
+    file    = "${params.outdir}/pipeline_info/execution_report_${params.trace_report_suffix}.html"
+}
+
+trace {
+    enabled = true
+    file    = "${params.outdir}/pipeline_info/execution_trace_${params.trace_report_suffix}.txt"
+}
+
+dag {
+    enabled = true
+    file    = "${params.outdir}/pipeline_info/pipeline_dag_${params.trace_report_suffix}.html"
 }

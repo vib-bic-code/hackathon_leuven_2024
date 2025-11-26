@@ -8,14 +8,21 @@
 - predict.nf can be used independently from train.nf
 
 ```bash
-nextflow run main.nf -profile vsc_kul_uhasselt,tier2kul_custom --model n2v
+
+# on wsl with docker
+nextflow run main.nf -c nextflow.config_care --profile docker_wsl --model care --basepath path_where_data_folder_is
+# on a cluster with conda
+nextflow run main.nf -profile vsc_kul_uhasselt,conda_tier2 --model n2v --basepath path_where_data_folder_is
+# on another cluster with singularity
+nextflow run main.nf -profile vsc_ugent,singularity_tier1 --model n2n --basepath path_where_data_folder_is
+
 ```
 
 ## to do
-- clean config
+- clean config =>done
 - add tests
 - add documentations
-- test conda
+- test conda => done
 
 ## how to use the containers from seqera
 
