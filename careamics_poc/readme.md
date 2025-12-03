@@ -35,6 +35,12 @@ export APPTAINER_CACHE=$VSC_SCRATCH/.apptainer
 export APPTAINER_TMP=$VSC_SCRATCH/.apptainer
 apptainer pull careamics_wave.sif oras://community.wave.seqera.io/library/careamics:0.0.15--79edde96e3aa7bcb
 ```
+### How to run test
+
+```bash
+# for config
+nf-test test --profile conda modules/config/tests/main.nf.test
+```
 
 ### general
 - let me know whether there are any mistakes or things that can be done better
