@@ -1,0 +1,61 @@
+nextflow_process {
+
+    name "Test Process TRAINING"
+    script "../main.nf"
+    process "training"
+
+    tag "modules"
+    tag "modules_local"
+    tag "careamics"
+    tag "training"
+
+    test("create model") {
+
+        when {
+            process {
+                """
+                input[0] = tuple(
+                    [ id:'0' ],
+                    file('/home/tatiana/test_careamics/n2v_train_sem/train.tif'),                    
+                    file('/home/tatiana/test_careamics/n2v_val_sem/val.tif'),
+                    file('/home/tatiana/results_careamics/config_n2v/config.yaml')
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert process.out.model.size() == 1 },
+                { assert path(process.out.model[0]).exists() },
+                {assert snapshot(process.out.model[0]).match("model")}
+            )
+        }
+    }
+
+    test("stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = tuple(
+                    [ id:'0' ],
+                    file('/home/tatiana/test_careamics/n2v_train_sem/train.tif'),
+                    file('/home/tatiana/test_careamics/n2v_val_sem/val.tif'),
+                    file('/home/tatiana/results_careamics/config_n2v/config.yaml')
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match()}
+            )
+        }
+    }
+}
