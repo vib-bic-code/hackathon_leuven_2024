@@ -1,0 +1,29 @@
+{
+    "stub": {
+        "content": [
+            {
+                "0": [
+                    "last.ckpt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "model": [
+                    "last.ckpt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-12-03T15:07:14.177535348"
+    },
+    "model": {
+        "content": [
+            "last.ckpt:md5,2cdb5a2863a430525b81c2d519341680"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-12-03T15:05:53.490605746"
+    }
+}
