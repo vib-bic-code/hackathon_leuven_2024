@@ -1,0 +1,66 @@
+nextflow_process {
+
+    name "Test Process PREDICTION"
+    script "../main.nf"
+    process "prediction"
+    tag "modules"
+    tag "modules_local"
+    tag "careamics"
+    tag "prediction"
+
+    test("denoise test data") {
+
+        when {
+            params {
+               module_args= '--tile-size 256 256 -1 --tile-overlap 48 48 -1 --write-type tiff --axes YX --batch-size 32'
+            }
+            process {
+                config "/home/tatiana/hackathon_leuven_2024/careamics_poc/modules/predict/tests/nextflow.config"
+                """
+                input[0] = tuple(
+                    file('/home/tatiana/test_careamics/n2v_test_sem/test.tif'),                    
+                    file('/home/tatiana/results_careamics/train_n2v/checkpoints/last.ckpt'),
+                    'tiff'
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert process.out.predictions.size() >= 1 },
+                { assert path(process.out.predictions[0]).exists() },
+                {assert snapshot(process.out.predictions[0]).match("predictions")}
+            )
+        }
+    }
+
+    test("stub") {
+
+        options "-stub"
+
+        when {
+            params {
+               module_args= '--tile-size 256 256 -1 --tile-overlap 48 48 -1 --write-type tiff --test-axis YX --batch-size 32'
+            }
+            process {
+                config "/home/tatiana/hackathon_leuven_2024/careamics_poc/modules/predict/tests/nextflow.config"
+                """
+                input[0] = tuple(
+                    file('/home/tatiana/test_careamics/n2v_test_sem/test.tif'),
+                    file('/home/tatiana/results_careamics/train_n2v/checkpoints/last.ckpt'),
+                    'tiff'
+                    )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match()}
+            )
+        }
+    }
+}
