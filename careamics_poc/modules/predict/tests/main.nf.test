@@ -1,8 +1,8 @@
 nextflow_process {
 
-    name "Test Process PREDICTION"
+    name "Test Process PREDICT_CLI"
     script "../main.nf"
-    process "prediction"
+    process "PREDICT_CLI"
     tag "modules"
     tag "modules_local"
     tag "careamics"
@@ -12,7 +12,7 @@ nextflow_process {
 
         when {
             params {
-               module_args= '--tile-size 256 256 -1 --tile-overlap 48 48 -1 --write-type tiff --axes YX --batch-size 32'
+               module_args= "--tile_size '256 256' --tile_overlap '48 48' --write_type tiff --data_type tiff --axes YX --batch_size 32"
             }
             process {
                 config "/home/tatiana/hackathon_leuven_2024/careamics_poc/modules/predict/tests/nextflow.config"
@@ -42,7 +42,7 @@ nextflow_process {
 
         when {
             params {
-               module_args= '--tile-size 256 256 -1 --tile-overlap 48 48 -1 --write-type tiff --test-axis YX --batch-size 32'
+               module_args= "--tile_size '256 256' --tile_overlap '48 48' --write_type tiff --data_type tiff  --batch_size 32 --axes YX"
             }
             process {
                 config "/home/tatiana/hackathon_leuven_2024/careamics_poc/modules/predict/tests/nextflow.config"

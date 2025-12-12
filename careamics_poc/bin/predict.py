@@ -29,12 +29,7 @@ if __name__=="__main__":
     argparser = create_arguments()
     argparser= argparser.parse_args()
     test_data_path, model_path, tilesize, tileoverlap, ax, batch_size, writetype, datatype = argparser.test_data, argparser.trained_model, argparser.tile_size, argparser.tile_overlap, argparser.axes, argparser.batch_size,argparser.write_type, argparser.data_type
-    #tile_size, tile_overlap= tuple([int(b) for b in tilesize]),tuple([int(b) for b in tileoverlap])
-    #tile_size, tile_overlap= tuple(tilesize),tuple(tileoverlap)
     tuple_tilesize=tuple([int(x) for x in tilesize.split(" ")])
     tuple_tileoverlap=tuple([int(x) for x in tileoverlap.split(" ")])
-    print(tuple_tilesize)
-
-    #tuple_from_tilesize = tuple(map(int,tilesize))
-    #print(tuple_from_tilesize)
+    print(test_data_path,model_path, tuple_tilesize, tuple_tileoverlap, ax, int(batch_size), datatype, writetype)
     prediction_careamist(test_data_path,model_path, tuple_tilesize, tuple_tileoverlap, ax, int(batch_size), datatype, writetype)
