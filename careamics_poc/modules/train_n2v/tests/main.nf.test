@@ -1,24 +1,28 @@
 nextflow_process {
 
-    name "Test Process TRAINING"
+    name "Test Process TRAIN_N2V"
     script "../main.nf"
-    process "training"
+    process "TRAIN_N2V"
 
     tag "modules"
     tag "modules_local"
     tag "careamics"
-    tag "training"
+    tag "training_n2v"
 
-    test("create model") {
+    test("train  model n2v2") {
 
-        when {
+        when { 
+            params {
+               module_args= "--data_type tiff --experiment_name n2v --batch_size 32 --patch_size '64 64' --num_epochs 30 --axes YX --use_n2v2 True "
+            }
             process {
+                config "/home/tatiana/hackathon_leuven_2024/careamics_poc/modules/train_n2v/tests/nextflow.config"
                 """
                 input[0] = tuple(
                     [ id:'0' ],
                     file('/home/tatiana/test_careamics/n2v_train_sem/train.tif'),                    
                     file('/home/tatiana/test_careamics/n2v_val_sem/val.tif'),
-                    file('/home/tatiana/results_careamics/config_n2v/config.yaml')
+                    'n2v'
                 )
                 """
             }
@@ -29,7 +33,36 @@ nextflow_process {
                 { assert process.success },
                 { assert process.out.model.size() == 1 },
                 { assert path(process.out.model[0]).exists() },
-                {assert snapshot(process.out.model[0]).match("model")}
+                {assert snapshot(process.out.model[0]).match("n2v2")}
+            )
+        }
+    }
+
+    test("train  model n2v") {
+
+        when { 
+            params {
+               module_args= "--data_type tiff --experiment_name n2v --batch_size 32 --patch_size '64 64' --num_epochs 30 --axes YX --use_n2v2 False "
+            }
+            process {
+                config "/home/tatiana/hackathon_leuven_2024/careamics_poc/modules/train_n2v/tests/nextflow.config"
+                """
+                input[0] = tuple(
+                    [ id:'0' ],
+                    file('/home/tatiana/test_careamics/n2v_train_sem/train.tif'),                    
+                    file('/home/tatiana/test_careamics/n2v_val_sem/val.tif'),
+                    'n2v'
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert process.out.model.size() == 1 },
+                { assert path(process.out.model[0]).exists() },
+                {assert snapshot(process.out.model[0]).match("n2v")}
             )
         }
     }
@@ -39,14 +72,17 @@ nextflow_process {
         options "-stub"
 
         when {
+            params {
+               module_args= "--data_type tiff --experiment_name n2v --batch_size --patch_size '64 64' --num_epochs 30 --axes YX --use_n2v2 True "
+            }
             process {
+                config "/home/tatiana/hackathon_leuven_2024/careamics_poc/modules/train_n2v/tests/nextflow.config"
                 """
                 input[0] = tuple(
                     [ id:'0' ],
                     file('/home/tatiana/test_careamics/n2v_train_sem/train.tif'),
                     file('/home/tatiana/test_careamics/n2v_val_sem/val.tif'),
-                    file('/home/tatiana/results_careamics/config_n2v/config.yaml')
-                )
+                    'n2v')
                 """
             }
         }

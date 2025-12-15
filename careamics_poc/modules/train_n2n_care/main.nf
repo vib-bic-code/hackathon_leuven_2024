@@ -1,8 +1,8 @@
-process TRAIN_N2V {
+process TRAIN_N2N_CARE {
     label 'process_gpu_medium'
     conda 'careamics'    
 
-    input: tuple val(meta), path(train), path(val), val(model)
+    input: tuple val(meta), path(train), path(target, name: "target/*"), val(model)
 
     output:
     path("*.yaml"), emit: config
@@ -15,7 +15,7 @@ process TRAIN_N2V {
     script:
     def args = task.ext.args ?: ''
     """
-    train_n2v.py   --train_data $train --val_data $val --model $model   --output_path . $args 
+    train_n2n_care.py   --train_data $train --train_target $target --model $model   --output_path . $args 
     """
     stub:
     """

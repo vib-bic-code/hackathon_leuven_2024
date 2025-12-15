@@ -1,0 +1,45 @@
+{
+    "stub": {
+        "content": [
+            {
+                "0": [
+                    "config.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "1": [
+                    "last.ckpt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "config": [
+                    "config.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "model": [
+                    "last.ckpt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-12-15T12:55:19.185884989"
+    },
+    "n2n": {
+        "content": [
+            "last.ckpt:md5,16607ccc7edaee560032eb0c4badaa96"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-12-15T12:53:02.472413975"
+    },
+    "care": {
+        "content": [
+            "last.ckpt:md5,3e149c3acfd72dd4ec350e80b9a86cdb"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-12-15T12:54:29.125928224"
+    }
+}

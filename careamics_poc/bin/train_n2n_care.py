@@ -42,7 +42,7 @@ def create_argparser_path():
     parser.add_argument("--model")
     parser.add_argument("--experiment_name",  type=str,help="name of the experiment")
     parser.add_argument ("--batch_size", type=int)
-    parser.add_argument("--patch_size", nargs='+', help ="2D or 3D")
+    parser.add_argument("--patch_size", help ="2D or 3D")
     parser.add_argument("--num_epochs", type=int)
     parser.add_argument ("--axes", type=str)
     parser.add_argument("--data_type", type=str)
@@ -55,8 +55,8 @@ def create_argparser_path():
 if __name__=="__main__":
     argparser = create_argparser_path()
     argparser= argparser.parse_args()
-    model,axis,  batch, epoch, datatype, exp_name, output_path, train_data, train_target, loss = argparser.model,argparser.axes, argparser.batch_size, argparser.num_epochs, argparser.data_type, argparser.experiment_name, argparser.output_path, argparser.train_data, argparser.train_target, argparser.loss
-    patch=argparser.patch_size
+    model,axis,  batch, epoch, datatype, exp_name, output_path, train_data, train_target, loss, patch_size = argparser.model,argparser.axes, argparser.batch_size, argparser.num_epochs, argparser.data_type, argparser.experiment_name, argparser.output_path, argparser.train_data, argparser.train_target, argparser.loss, argparser.patch_size
+    patch=tuple([int(x) for x in patch_size.split(" ")])
     config=create_config(model,exp_name, datatype,axis, patch, batch, epoch,loss)
     save_configuration(config, os.path.join(output_path, "config.yaml"))
     train_model(train_data, train_target,config)

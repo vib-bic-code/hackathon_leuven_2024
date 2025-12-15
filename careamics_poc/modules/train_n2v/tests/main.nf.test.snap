@@ -1,0 +1,45 @@
+{
+    "n2v2": {
+        "content": [
+            "last.ckpt:md5,266d90d5941916ad4e5ca217097f6b6b"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-12-15T12:32:18.611576766"
+    },
+    "n2v": {
+        "content": [
+            "last.ckpt:md5,d89708dec390d4adf2ed64df403e80a2"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-12-15T12:34:36.122167524"
+    },
+    "stub": {
+        "content": [
+            {
+                "0": [
+                    "config.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "1": [
+                    "last.ckpt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "config": [
+                    "config.yaml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "model": [
+                    "last.ckpt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-12-15T12:35:26.982676068"
+    }
+}
