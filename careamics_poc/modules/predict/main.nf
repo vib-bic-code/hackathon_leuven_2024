@@ -1,4 +1,4 @@
-process PREDICT_CLI {
+process PREDICT{
     label 'process_gpu_medium'
 
     input: tuple path(test_im), path(modelpath), val(file_extension) 
