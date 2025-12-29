@@ -2,12 +2,12 @@ nextflow_process {
 
     name "Test Process TRAIN_N2N"
     script "../main.nf"
-    process "TRAIN_N2N_CARE"
+    process "TRAIN_N2N"
 
     tag "modules"
     tag "modules_local"
     tag "careamics"
-    tag "training_n2n_care"
+    tag "training_n2n"
 
     test("train n2n model") {
 
@@ -38,35 +38,6 @@ nextflow_process {
         }
     }
 
-      test("train care model") {
-
-        when { 
-            params {
-               module_args= "--data_type tiff --experiment_name care --batch_size 32 --patch_size '128 128' --num_epochs 30 --axes YX --loss mae "
-            }
-            process {
-                config "/home/tatiana/hackathon_leuven_2024/careamics_poc/modules/train_n2n_care/tests/nextflow.config"
-                """
-                input[0] = tuple(
-                    [ id:'0' ],
-                    file('/home/tatiana/test_careamics/U2OS/train/low/img_0042.tif'),                    
-                    file('/home/tatiana/test_careamics/U2OS/train/GT/img_0042.tif'),
-                    'care'
-                )
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert process.success },
-                { assert process.out.model.size() == 1 },
-                { assert path(process.out.model[0]).exists() },
-                {assert snapshot(process.out.model[0]).match("care")}
-            )
-        }
-    }
-
     test("stub") {
 
         options "-stub"
@@ -77,7 +48,7 @@ nextflow_process {
 
             }
             process {
-                config "/home/tatiana/hackathon_leuven_2024/careamics_poc/modules/train_n2n_care/tests/nextflow.config"
+                config "/home/tatiana/hackathon_leuven_2024/careamics_poc/modules/train_n2n/tests/nextflow.config"
                 """
                 input[0] = tuple(
                     [ id:'0' ],

@@ -1,4 +1,4 @@
-# Readme
+# Denoising_careamics
 
 ## usage
 
@@ -20,9 +20,11 @@ nextflow run main.nf -profile vsc_ugent,singularity_tier1 --model n2n --basepath
 
 ## to do
 - clean config =>done
-- add tests
+- add tests => done
 - add documentations
 - test conda => done
+- test on VSC and add config 
+- test strn2v and test care (add config)
 
 ## how to use the containers from seqera
 
@@ -38,8 +40,10 @@ apptainer pull careamics_wave.sif oras://community.wave.seqera.io/library/caream
 ### How to run test
 
 ```bash
-# for config
-nf-test test --profile conda modules/config/tests/main.nf.test
+# for train n2v
+nf-test test --profile conda modules/train_n2v/tests/main.nf.test
+# for predict
+nf-test test --profile conda modules/predict/tests/main.nf.test
 ```
 
 ### general
